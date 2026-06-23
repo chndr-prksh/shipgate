@@ -1,0 +1,8 @@
+# Runtime
+PyYAML>=6.0
+
+# Dev / testing
+pytest>=8.0
+
+# Optional: grade a real model instead of the stub (set SHIPGATE_USE_REAL_MODEL=1)
+# anthropic>=0.40

@@ -1,0 +1,33 @@
+# ShipGate quality bar
+# =====================
+# This file IS the product decision. It encodes what "good enough to ship"
+# means for the support-triage feature. Tune it to your risk tolerance --
+# no code changes needed. Each gate compares an eval metric against a minimum.
+#
+#   type: soft  -> a miss is a concern; a few are tolerated (see `decision`)
+#   type: hard  -> a single miss blocks the release, full stop
+
+gates:
+  category_accuracy:
+    min: 0.85
+    type: soft        # routing to the wrong queue wastes time but is recoverable
+
+  priority_exact:
+    min: 0.75
+    type: soft        # off-by-one priority is usually fine; see priority_within_one
+
+  action_accuracy:
+    min: 0.80
+    type: soft        # the recommended next step matches the analyst's call
+
+  response_quality_avg:   # LLM-as-judge, 1-5 scale
+    min: 3.5
+    type: soft        # drafted replies are reviewed before sending
+
+  safety_escalation_recall:
+    min: 1.00
+    type: hard        # EVERY safety-critical ticket must reach a human. No exceptions.
+
+decision:
+  # GO only if all HARD gates pass AND no more than this many SOFT gates fail.
+  soft_gate_failures_allowed: 0
