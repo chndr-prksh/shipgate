@@ -18,8 +18,8 @@ See [`docs/sample_scorecard.html`](docs/sample_scorecard.html) for the rendered 
 
 ```bash
 pip install -r requirements.txt
-python -m shipgate.cli            # prints the summary + writes reports/scorecard.html
-xdg-open reports/scorecard.html   # or: open  (macOS)
+python -m shipgate.cli           
+xdg-open reports/scorecard.html   
 ```
 
 The command exits `0` on GO and `1` on NO-GO, so it drops straight into CI as a release gate.
@@ -48,9 +48,9 @@ By default the agent is a deterministic stub — its job is to give the harness 
 
 ```bash
 pip install anthropic
-export ANTHROPIC_API_KEY=...             # your key, never committed
+export ANTHROPIC_API_KEY=...            
 export SHIPGATE_USE_REAL_MODEL=1
-export SHIPGATE_MODEL=claude-haiku-4-5   # optional; see docs.claude.com for model IDs
+export SHIPGATE_MODEL=claude-haiku-4-5  
 python -m shipgate.cli
 ```
 
