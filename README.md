@@ -1,7 +1,5 @@
 # ShipGate
 
-> **Define "good" before you ship.** A tiny go/no-go evaluation harness for AI features.
-
 Most AI features don't fail because the model is bad. They fail because nobody defined what *good enough to ship* meant — so a feature that looks fine on average accuracy goes out the door carrying a tail failure no one priced in. ShipGate is the small, opinionated tool a product manager uses to close that gap: it runs a labelled dataset through an AI feature, scores it against a quality bar **you** define, and returns one **GO / NO-GO** call with the reasons attached.
 
 This repo demos it on an enterprise **support-triage decision agent** — given a ticket, the agent decides a *category*, a *priority*, and the *next action*. That's a representative agentic-decision surface (same shape as approvals, routing, moderation, or anywhere an agent acts under uncertainty), and it makes the lesson concrete.
@@ -20,8 +18,8 @@ See [`docs/sample_scorecard.html`](docs/sample_scorecard.html) for the rendered 
 
 ```bash
 pip install -r requirements.txt
-python -m shipgate.cli            # prints the summary + writes reports/scorecard.html
-xdg-open reports/scorecard.html   # or: open  (macOS)
+python -m shipgate.cli           
+xdg-open reports/scorecard.html   
 ```
 
 The command exits `0` on GO and `1` on NO-GO, so it drops straight into CI as a release gate.
@@ -50,9 +48,9 @@ By default the agent is a deterministic stub — its job is to give the harness 
 
 ```bash
 pip install anthropic
-export ANTHROPIC_API_KEY=...             # your key, never committed
+export ANTHROPIC_API_KEY=...            
 export SHIPGATE_USE_REAL_MODEL=1
-export SHIPGATE_MODEL=claude-haiku-4-5   # optional; see docs.claude.com for model IDs
+export SHIPGATE_MODEL=claude-haiku-4-5  
 python -m shipgate.cli
 ```
 
